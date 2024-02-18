@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { MatTabGroup } from '@angular/material/tabs';
-import { MatTab } from '@angular/material/tabs';
-import { ViewEncapsulation } from '@angular/core';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { SimulatorComponent } from '../simulator/simulator.component';
 
 @Component({
-  selector: 'app-header',
   standalone: true,
-  imports: [MatTabGroup, MatTab],
+  selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
-  encapsulation: ViewEncapsulation.None
+  imports: [
+    MatTab,
+    MatTabGroup,
+    SimulatorComponent,
+  ]
 })
 export class HeaderComponent {
-  title: string = "Space and Rocketry Calculator (SpARC)";
-
-  customLabelClass = 'mat-tab-label-custom';
+  title: string = "Space And Rocketry Calculator SpARC"
 }
