@@ -7,17 +7,21 @@ from dash import Dash, dcc, html, Output, Input, callback
 from simulator_tab import get_simulator_tab
 
 TAB_STYLE = {
-                    'fontFamily': 'Arial, Helvetica, sans-serif',
-                    "fontSize": "15pt",
-                    "color": "#ECECEC",
-                    "background": "#737373"
+                    'fontFamily': 'Arial Bold, Helvetica, sans-serif',
+                    "fontSize": "2vh",
+                    "fontWeight": "bold",
+                    "borderColor": '#444444',
+                    "color": "white",
+                    "background": "#444444"
                 }
 
 SELECTED_TAB_STYLE = {
-                    'fontFamily': 'Arial, Helvetica, sans-serif',
-                    "fontSize": "16pt",
+                    'fontFamily': 'Arial Bold, Helvetica, sans-serif',
+                    "fontWeight": "bold",
+                    "fontSize": "2vh",
                     "color": "white",
-                    "background": "#737373"
+                    "background": "#727272",
+                    "borderColor": "#727272",
                 }
 def app_main():
 
@@ -32,7 +36,7 @@ def app_main():
         ]
     )
 
-    app.run(debug=True)
+    app.run(debug=True, host="localhost")
 
 def get_header_component() -> html.Div:
 
@@ -42,20 +46,19 @@ def get_header_component() -> html.Div:
                 "Space And Rocketry Calculator (SpARC)",
                 style={
                     'fontFamily': 'Arial, Helvetica, sans-serif',
-                    "fontSize": "20pt",
+                    "fontSize": "3vh",
                     "color": "white",
-                    
                 }
                 )
         ],
         style={
             "background": "#7D0000",
-            "top": "0%",
-            "right": "0%",
-            "left": "0%",
-            "position": "absolute",
-            "paddingLeft": "10pt",
-            "height": "7%",
+            "top": "0",
+            "right": "0",
+            "left": "0",
+            "position": "fixed",
+            "paddingLeft": "1vw",
+            "height": "7vh",
         }
     )
 
@@ -95,19 +98,18 @@ def get_tabs_component() -> html.Div:
                     )
                 ],
                 style={
-                    "paddingLeft": "0%",
                     "position": "fixed",
-                    "paddingRight": "0%",
-                    "width": "100vw",
+                    "top": "7vh",
                     "left": "0",
-                    "right": "0"
+                    "right": "0",
+                    "height": "7vh"
                 }
             ),
         ],
         style={
                     "postition": "fixed",
-                    "paddingTop": "3.3%",
-                    "width": '100vw',
+                    "top": "7vh",
+                    "height": "7vh",
                     "left": "0",
                     "right":  '0'
                 }
@@ -123,7 +125,14 @@ def tab_switchboard(tab):
     if tab == 'sim':
         return get_simulator_tab()
     else: 
-        return
+        return html.Div(style={
+            "position": "fixed",
+            "left": "0",
+            "right": "0",
+            "top": "14vh",
+            "bottom": "0",
+            "backgroundColor": "#2F2F2F"
+        })
 
 
 if __name__ == '__main__':
