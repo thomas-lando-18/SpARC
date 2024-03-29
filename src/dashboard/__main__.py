@@ -73,6 +73,12 @@ def get_tabs_component() -> html.Div:
                 value='header-tabs',
                 children=[
                     dcc.Tab(
+                        label="Geographic",
+                        value='geo',
+                        style=TAB_STYLE,
+                        selected_style=SELECTED_TAB_STYLE
+                    ),
+                    dcc.Tab(
                         label="Simulator",
                         value='sim',
                         style=TAB_STYLE,
