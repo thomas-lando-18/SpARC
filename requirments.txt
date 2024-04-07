@@ -1,0 +1,9 @@
+numpy
+pandas
+dash
+plotly
+scipy
+black
+pylint
+geopandas
+matplotlib
