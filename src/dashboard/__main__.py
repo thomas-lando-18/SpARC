@@ -6,37 +6,24 @@ from dash import Dash, dcc, html, Output, Input, callback
 
 from simulator_tab import get_simulator_tab
 
-TAB_STYLE = {
-                    'fontFamily': 'Arial Bold, Helvetica, sans-serif',
-                    "fontSize": "2vh",
-                    "fontWeight": "bold",
-                    "borderColor": '#444444',
-                    "color": "white",
-                    "background": "#444444"
-                }
+from constants import TAB_STYLE, SELECTED_TAB_STYLE
 
-SELECTED_TAB_STYLE = {
-                    'fontFamily': 'Arial Bold, Helvetica, sans-serif',
-                    "fontWeight": "bold",
-                    "fontSize": "2vh",
-                    "color": "white",
-                    "background": "#727272",
-                    "borderColor": "#727272",
-                }
+
 def app_main():
 
-    app = Dash(__name__)
+    app = Dash(__name__, title="SpARC", update_title="Loading...")
 
     # App layout
     app.layout = html.Div(
         children=[
             get_header_component(),
             get_tabs_component(),
-            html.Div(id="header-tabs-content")
+            html.Div(id="header-tabs-content"),
         ]
     )
 
     app.run(debug=True, host="localhost")
+
 
 def get_header_component() -> html.Div:
 
@@ -45,11 +32,11 @@ def get_header_component() -> html.Div:
             html.H1(
                 "Space And Rocketry Calculator (SpARC)",
                 style={
-                    'fontFamily': 'Arial, Helvetica, sans-serif',
+                    "fontFamily": "Arial, Helvetica, sans-serif",
                     "fontSize": "3vh",
                     "color": "white",
-                }
-                )
+                },
+            )
         ],
         style={
             "background": "#7D0000",
@@ -59,87 +46,89 @@ def get_header_component() -> html.Div:
             "position": "fixed",
             "paddingLeft": "1vw",
             "height": "7vh",
-        }
+        },
     )
 
     return header
+
 
 def get_tabs_component() -> html.Div:
 
     tabs = html.Div(
         children=[
             dcc.Tabs(
-                id='header-tabs',
-                value='header-tabs',
+                id="header-tabs",
+                value="header-tabs",
                 children=[
                     dcc.Tab(
                         label="Geographic",
-                        value='geo',
+                        value="geo",
                         style=TAB_STYLE,
-                        selected_style=SELECTED_TAB_STYLE
+                        selected_style=SELECTED_TAB_STYLE,
                     ),
                     dcc.Tab(
                         label="Simulator",
-                        value='sim',
+                        value="sim",
                         style=TAB_STYLE,
-                        selected_style=SELECTED_TAB_STYLE
+                        selected_style=SELECTED_TAB_STYLE,
                     ),
                     dcc.Tab(
                         label="Rocket",
-                        value='rocket',
+                        value="rocket",
                         style=TAB_STYLE,
-                        selected_style=SELECTED_TAB_STYLE
+                        selected_style=SELECTED_TAB_STYLE,
                     ),
                     dcc.Tab(
                         label="Location",
-                        value='location',
+                        value="location",
                         style=TAB_STYLE,
-                        selected_style=SELECTED_TAB_STYLE
+                        selected_style=SELECTED_TAB_STYLE,
                     ),
                     dcc.Tab(
                         label="Settings",
-                        value='setting',
+                        value="setting",
                         style=TAB_STYLE,
-                        selected_style=SELECTED_TAB_STYLE
-                    )
+                        selected_style=SELECTED_TAB_STYLE,
+                    ),
                 ],
                 style={
                     "position": "fixed",
                     "top": "7vh",
                     "left": "0",
                     "right": "0",
-                    "height": "7vh"
-                }
+                    "height": "7vh",
+                },
             ),
         ],
         style={
-                    "postition": "fixed",
-                    "top": "7vh",
-                    "height": "7vh",
-                    "left": "0",
-                    "right":  '0'
-                }
-        
+            "postition": "fixed",
+            "top": "7vh",
+            "height": "7vh",
+            "left": "0",
+            "right": "0",
+        },
     )
 
     return tabs
 
-@callback(Output('header-tabs-content', 'children'),
-              Input('header-tabs', 'value'))
+
+@callback(Output("header-tabs-content", "children"), Input("header-tabs", "value"))
 def tab_switchboard(tab):
 
-    if tab == 'sim':
+    if tab == "sim":
         return get_simulator_tab()
-    else: 
-        return html.Div(style={
-            "position": "fixed",
-            "left": "0",
-            "right": "0",
-            "top": "14vh",
-            "bottom": "0",
-            "backgroundColor": "#2F2F2F"
-        })
+    else:
+        return html.Div(
+            style={
+                "position": "fixed",
+                "left": "0",
+                "right": "0",
+                "top": "14vh",
+                "bottom": "0",
+                "backgroundColor": "#2F2F2F",
+            }
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app_main()
