@@ -7,3 +7,4 @@ black
 pylint
 geopandas
 matplotlib
+coverage
